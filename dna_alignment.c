@@ -3,6 +3,10 @@
 
 #define MAX 20   // max size for dp table
 
+void fill_table(int dp[MAX][MAX], char A[], char B[], int match, int mismatch, int gap);
+void print_table(int dp[MAX][MAX], int m, int n);
+void run_test(char *A, char *B, int match, int mismatch, int gap);
+
 void init_table(int dp[MAX][MAX], int m, int n, int gap) {
     dp[0][0] = 0;
 
@@ -13,6 +17,20 @@ void init_table(int dp[MAX][MAX], int m, int n, int gap) {
     for (int j = 1; j <= n; j++) {
         dp[0][j] = dp[0][j - 1] + gap;
     }
+}
+
+void run_test(char *A, char *B, int match, int mismatch, int gap) {
+    printf("====== Testing %s vs %s ======\n", A, B);
+
+    int m = strlen(A);
+    int n = strlen(B);
+
+    int dp[20][20];
+    init_table(dp, m, n, gap);
+    fill_table(dp, A, B, match, mismatch, gap);
+    print_table(dp, m, n);
+
+    printf("Final score = %d\n\n", dp[m][n]);
 }
 
 void fill_table(int dp[MAX][MAX], char A[], char B[], int match, int mismatch, int gap) {
@@ -62,6 +80,15 @@ int main() {
     init_table(dp, m, n, gap);
     fill_table(dp, A, B, match, mismatch, gap);
     print_table(dp, m, n);
+
+    run_test("A", "A", match, mismatch, gap);
+    run_test("A", "G", match, mismatch, gap);
+    run_test("A", "", match, mismatch, gap);
+    run_test("", "A", match, mismatch, gap);
+    run_test("AC", "AC", match, mismatch, gap);
+    run_test("AC", "AG", match, mismatch, gap);
+    run_test("AAGC", "AGT", match, mismatch, gap);
+
 
     printf("\nFinal score: %d\n", dp[m][n]);
 
