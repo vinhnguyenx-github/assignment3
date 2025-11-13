@@ -19,7 +19,7 @@ void init_table(int dp[MAX][MAX], int m, int n, int gap) {
     }
 }
 
-void run_test(char *A, char *B, int match, int mismatch, int gap) {
+void test(char *A, char *B, int match, int mismatch, int gap) {
     printf("====== Testing %s vs %s ======\n", A, B);
 
     int m = strlen(A);
@@ -81,13 +81,13 @@ int main() {
     fill_table(dp, A, B, match, mismatch, gap);
     print_table(dp, m, n);
 
-    run_test("A", "A", match, mismatch, gap);
-    run_test("A", "G", match, mismatch, gap);
-    run_test("A", "", match, mismatch, gap);
-    run_test("", "A", match, mismatch, gap);
-    run_test("AC", "AC", match, mismatch, gap);
-    run_test("AC", "AG", match, mismatch, gap);
-    run_test("AAGC", "AGT", match, mismatch, gap);
+    test("A", "A", match, mismatch, gap);
+    test("A", "G", match, mismatch, gap);
+    test("A", "", match, mismatch, gap);
+    test("", "A", match, mismatch, gap);
+    test("AC", "AC", match, mismatch, gap);
+    test("AC", "AG", match, mismatch, gap);
+    test("AAGC", "AGT", match, mismatch, gap);
 
 
     printf("\nFinal score: %d\n", dp[m][n]);
