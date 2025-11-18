@@ -5,7 +5,7 @@
 
 void fill_table(int dp[MAX][MAX], char A[], char B[], int match, int mismatch, int gap);
 void print_table(int dp[MAX][MAX], int m, int n);
-void run_test(char *A, char *B, int match, int mismatch, int gap);
+void test(char *A, char *B, int match, int mismatch, int gap);
 
 void init_table(int dp[MAX][MAX], int m, int n, int gap) {
     dp[0][0] = 0;
