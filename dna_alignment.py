@@ -1,3 +1,4 @@
+import time
 
 def dna_alignment(A, B, match=1, mismatch=-1, gap=-2):
     m, n = len(A), len(B)
@@ -44,4 +45,7 @@ def dna_alignment(A, B, match=1, mismatch=-1, gap=-2):
     print(f"\nFinal alignment score: {dp[m][n]}")
 
 
-dna_alignment("AAGC", "AAGC")
+start = time.time()
+dna_alignment("AAAA", "GGGG")
+end = time.time()
+print(f"Runtime: {end - start} seconds")

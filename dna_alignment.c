@@ -1,11 +1,29 @@
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 
-#define MAX 20   // max size for dp table
 
+#define MAX 50   // max size for dp table
+void init_table(int dp[MAX][MAX], int m, int n, int gap);
 void fill_table(int dp[MAX][MAX], char A[], char B[], int match, int mismatch, int gap);
 void print_table(int dp[MAX][MAX], int m, int n);
 void test(char *A, char *B, int match, int mismatch, int gap);
+
+double measure_runtime(char A[], char B[], int match, int mismatch, int gap) {
+    clock_t start = clock();
+
+    int m = strlen(A);
+    int n = strlen(B);
+    int dp[MAX][MAX];
+
+    init_table(dp, m, n, gap);
+    fill_table(dp, A, B, match, mismatch, gap);
+    print_table(dp, m, n);
+
+    clock_t end = clock();
+    return (double)(end - start) / CLOCKS_PER_SEC;
+}
+
 
 void init_table(int dp[MAX][MAX], int m, int n, int gap) {
     dp[0][0] = 0;
@@ -25,7 +43,7 @@ void test(char *A, char *B, int match, int mismatch, int gap) {
     int m = strlen(A);
     int n = strlen(B);
 
-    int dp[20][20];
+    int dp[MAX][MAX];
     init_table(dp, m, n, gap);
     fill_table(dp, A, B, match, mismatch, gap);
     print_table(dp, m, n);
@@ -65,8 +83,8 @@ void print_table(int dp[MAX][MAX], int m, int n) {
 }
 
 int main() {
-    char A[] = "AAGC";
-    char B[] = "AGT";
+    char A[] = "AAAA";
+    char B[] = "GGGG";
 
     int match = 1;
     int mismatch = -1;
@@ -80,6 +98,9 @@ int main() {
     init_table(dp, m, n, gap);
     fill_table(dp, A, B, match, mismatch, gap);
     print_table(dp, m, n);
+
+    double runtime = measure_runtime(A, B, match, mismatch, gap);
+    printf("Runtime of main alignment: %f seconds\n", runtime);
 
     test("A", "A", match, mismatch, gap);
     test("A", "G", match, mismatch, gap);
