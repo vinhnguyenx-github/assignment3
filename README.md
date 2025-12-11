@@ -16,11 +16,12 @@ This project compares two DNA sequences using dynamic programming. The program b
 
 - Wrote the C implementation.
 - Added initialization, fill, and print functions.
-- Prepared the automated test suite for multiple DNA examples.
+- Prepared the test suite for multiple DNA examples.
 
 ### Bao Nguyen
 
 - Wrote pseudocode.
+- Time complexity analysis
 - Analyzed DP operations and alignment principles.
 - Reviewed correctness and documentation.
 
@@ -87,6 +88,35 @@ Therefore, the final time complexity of the implemented algorithm is:
 O(m × n)
 
 Dynamic programming prevents exponential recomputation seen in naive recursion.
+
+## Runtime Comparison
+
+The runtime of both implementations was measured using built‑in timing functions.  
+In C, the `clock()` function records the start and end of the alignment.  
+In Python, the `time.time()` function measures execution duration for the same input.
+
+### How the comparison was tested
+
+- Both programs aligned the same sequences.
+- Python version originally included print statements for each DP step.
+- C version printed only the final DP table.
+- Timing was recorded around the alignment function only, not test suites.
+
+### Results
+
+When Python prints each DP update, it becomes much slower.  
+For medium tests, the C version runs **about 75× to 100× faster**.
+
+Even when all print statements are removed from Python, the C version remains faster because:
+
+- C uses contiguous fixed‑size arrays.
+- C performs direct integer operations with no dynamic typing.
+- C does not allocate nested list objects.
+- C is compiled to machine code.
+
+This leads to consistently faster runtime for larger sequences.
+
+**Note:** All runtime measurements were performed on a MacBook Pro with an Apple M1 processor.
 
 ## Project Structure
 
